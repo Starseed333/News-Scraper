@@ -19,7 +19,7 @@ var cheerio = require("cheerio");
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://heroku_ktqr0pqg:r3jau3vovpqr6m01tf51ib9paq@ds125556.mlab.com:25556/heroku_ktqr0pqg");
 
-//var db = mongoose.connection;
+var db = mongoose.connection;
 
 //Define port
 var PORT = 3000

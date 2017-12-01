@@ -29,6 +29,7 @@ A full stack application with persistent data using MongoDB. The web app lets us
 * Cheerio
 * Request
 
-* Check out the [News-Scraper Application Deployed at Heroku](https://youtu.be/3OsYvHtNYL0)
+* Check out the [News-Scraper Application Deployed at Heroku](https://gentle-citadel-55468.herokuapp.com)
 
+* Check out the application in [youtube](https://youtu.be/3OsYvHtNYL0)
 

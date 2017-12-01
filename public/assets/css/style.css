@@ -1,7 +1,12 @@
 body {
-    background-color: grey;
+    background-image: url('/assets/img/newsimage.jpeg');
     padding-top: 70px;
 }
+
+.jumbotron {
+    background-color:transparent !important; 
+}
+
 
 .deleteNote {
 	display: inline-block;
@@ -15,3 +20,5 @@ body {
 #scrape {
     margin: 8px 0px;
 }
+
+

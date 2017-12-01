@@ -22,7 +22,7 @@ mongoose.connect("mongodb://heroku_ktqr0pqg:r3jau3vovpqr6m01tf51ib9paq@ds125556.
 var db = mongoose.connection;
 
 //Define port
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();

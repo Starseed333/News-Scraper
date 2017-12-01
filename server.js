@@ -17,9 +17,7 @@ var cheerio = require("cheerio");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the MongoDB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://heroku_ktqr0pqg:r3jau3vovpqr6m01tf51ib9paq@ds125556.mlab.com:25556/heroku_ktqr0pqg", {
-  useMongoClient: true
-});
+mongoose.connect("mongodb://heroku_ktqr0pqg:r3jau3vovpqr6m01tf51ib9paq@ds125556.mlab.com:25556/heroku_ktqr0pqg");
 
 var db = mongoose.connection;
 

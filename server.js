@@ -17,11 +17,13 @@ var cheerio = require("cheerio");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the MongoDB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://heroku_ktqr0pqg:r3jau3vovpqr6m01tf51ib9paq@ds125556.mlab.com:25556/heroku_ktqr0pqg");
+mongoose.connect("mongodb://heroku_ktqr0pqg:r3jau3vovpqr6m01tf51ib9paq@ds125556.mlab.com:25556/heroku_ktqr0pqg", {
+    useMongoClient: true
+});
 
 var db = mongoose.connection;
 
-//Define port
+//Define port note. must have process.env to deploy app to heroku otherwise h10 error
 var PORT = process.env.PORT || 3000;
 
 // Initialize Express
@@ -63,7 +65,8 @@ db.once("open", function() {
 // Routes
 //GET requests to render Handlebars pages
 app.get("/", function(req, res) {
-  Article.find({"saved": false}, function(error, data) {
+  //execute callback limit 20 articles in homepage (ref mongoose query builder)
+  Article.find({"saved": false}).limit(20).exec(function(error, data) {
     var hbsObject = {
       article: data
     };
@@ -122,37 +125,19 @@ app.get("/scrape", function(req, res) {
 });
 //This will get the articles we scraped from the mongoDB
  app.get("/articles", function(req,res){
-  Article.find({})
-    .sort({'date': -1})
-    .limit(2)
-    .exec(
-      function(error, doc){
-        // log any errors
-        if (err){
-          console.log(error);
-        } 
-        // or send the doc to the browser as a json object
-        else {
-          res.json(doc);
-        }
-      });
-   });
+  //execute callback limit 20 in json document(ref mongoose query builder)
+    Article.find({}).limit(20).exec(function(error, doc) {
+    // Log any errors if the server encounters one
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise, send the result of this query to the browser
+    else {
+      res.json(doc);
+    }
+  });
+});
 
-
- // This will get the articles we scraped from the mongoDB
-// app.get("/articles", function(req, res) {
-//   // Grab every doc in the Articles array
-//   Article.find({}, function(error, doc) {
-//     // Log any errors
-//     if (error) {
-//       console.log(error);
-//     }
-//     // Or send the doc to the browser as a json object
-//     else {
-//       res.json(doc);
-//     }
-//   });
-// });
 
 // Grab an article by it's ObjectId
 app.get("/articles/:id", function(req, res) {
